@@ -1,0 +1,11 @@
+{
+  "name": "claude-mods",
+  "owner": { "name": "miloaissatu" },
+  "plugins": [
+    {
+      "name": "statusband",
+      "source": "./statusband",
+      "description": "Status band above the prompt: context fill, 5h/7d quota with reset times, cache hit %, session cost and active time"
+    }
+  ]
+}
