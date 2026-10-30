@@ -1,0 +1,1 @@
+{ "name": "statuspane", "version": "0.1.0", "description": "Docked pane beside the transcript: a live, condensed /usage", "types": "./types/index.d.ts" }
