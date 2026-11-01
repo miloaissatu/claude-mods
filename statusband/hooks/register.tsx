@@ -1,5 +1,5 @@
 import { atom, read, update } from 'claude-code'
-import type { Register } from 'claude-code'
+import type { Register, RenderChildren } from 'claude-code'
 
 import type { Totals, Usage } from '../types'
 
@@ -54,14 +54,17 @@ export const register: Register = on => {
     return next(e)
   })
 
+  // main loop only: each subagent starts with a cold cache, which would drag the hit rate down
   on('turn.complete', async ($, e, next) => {
-    const u = e.usage
-    await update($, totals, (t: Totals) => ({
-      input: t.input + (u?.input_tokens ?? 0),
-      read: t.read + (u?.cache_read_input_tokens ?? 0),
-      write: t.write + (u?.cache_creation_input_tokens ?? 0),
-      activeMs: e.agentId ? t.activeMs : t.activeMs + e.durationMs,
-    }))
+    if (!e.agentId) {
+      const u = e.usage
+      await update($, totals, (t: Totals) => ({
+        input: t.input + (u?.input_tokens ?? 0),
+        read: t.read + (u?.cache_read_input_tokens ?? 0),
+        write: t.write + (u?.cache_creation_input_tokens ?? 0),
+        activeMs: t.activeMs + e.durationMs,
+      }))
+    }
 
     return next(e)
   })
@@ -82,7 +85,7 @@ export const register: Register = on => {
       return p >= 80 ? '#f87171' : p >= 55 ? '#fbbf24' : '#4ade80'
     }
 
-    const segs: unknown[] = []
+    const segs: RenderChildren[] = []
 
     if (u.ctxPercent !== null) {
       const c = tone(u.ctxPercent, 85)

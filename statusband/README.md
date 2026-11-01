@@ -5,7 +5,8 @@ tokens, the 5-hour and weekly quota with reset times, prompt-cache hit rate,
 session cost and active time.
 
 Percentages turn amber and red as they fill. Context turns risky sooner than
-quota does. Cache hit rate and active time count turns since the mod loaded.
+quota does. Cache hit rate and active time count main-session turns since the mod
+loaded. Subagent turns are left out; the session cost still includes them.
 
 ## Use
 

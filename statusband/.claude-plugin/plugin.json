@@ -1,1 +1,1 @@
-{ "name": "statusband", "version": "0.1.0", "description": "Status band above the prompt: context fill, 5h/7d quota, session cost", "types": "./types/index.d.ts" }
+{ "name": "statusband", "version": "0.1.1", "description": "Status band above the prompt: context fill, 5h/7d quota, session cost", "types": "./types/index.d.ts" }
